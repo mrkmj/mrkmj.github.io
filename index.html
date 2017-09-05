@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>M'Place</title>
+    <link href="index1.css" rel="stylesheet">
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?119aa4576c6a2addce94c7d470ecffa1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+  </head>
+
+  <body>
+
+    <div id="container">
+      <h1>这不会出现Apple，真的。</h1>
+      <a  href="apple/apple.html">不信你按下试试。</a>
+    </div>
+
+    <div id="search">
+      <form onsubmit="return baiduWithHttps(this)" action="http://www.baidu.com/baidu" target="_blank">
+        <input name="tn" type="hidden" value="SE_zzsearchcode_shhzc78w">
+        <input type="text"  onfocus="checkHttps" name="word"  size="30">
+        <input type="submit"value="百度搜索">
+      </form>
+    </div>
+    <script src="checkHttps.js"></script>
+
+
+  </body>
+</html>
