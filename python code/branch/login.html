@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>注册登陆小系统代码</title>
+  </head>
+  <body>
+    <div>
+      <h1>菜单主程序</h1>
+      <p>
+        <pre>
+#coding=utf-8
+import pickle
+import os
+
+import new1
+import denglu
+
+
+import search
+
+'''----判断文件是否为空----'''
+print ("processing data......")
+able=os.path.getsize('new1.txt')
+
+if able==0:
+    a={}
+    f2 = open('new1.txt','wb')
+    pickle.dump(a,f2)
+    f2.close()
+else:
+    pass
+
+'''----主菜单----'''
+def showmenu():
+    prompt = '''
+|--- 新建用户：N/n ---|
+|--- 登录账号：E/e ---|
+|--- 查找用户：S/s ---|
+|--- 推出程序：Q/q ---|
+|--- 请输入指令代码：'''
+
+    while True:
+        chosen = False
+        while not chosen:
+            choice = input(prompt)
+            if choice not in 'NnEeQqYySs':
+                print('您输入的指令代码错误，请重新输入：')
+            else:
+                chosen = True
+
+        if choice == 'q' or choice == 'Q':
+            break
+        if choice == 'n' or choice == 'N':
+            new1.new1()
+            os.system( 'cls' )
+        if choice == 'e' or choice == 'E':
+            denglu.denglu()
+            os.system( 'cls' )
+        if choice == 's' or choice == 'S':
+            search.search()
+            os.system( 'cls' )
+        if choice == 'y' or choice == 'Y':
+            f2 = open('new1.txt','rb')
+            b=(pickle.load(f2))
+            print(b)
+            f2.close()
+
+showmenu()
+        </pre>
+      </p>
+    </div>
+
+    <div>
+      <h1>注册程序</h1>
+      <p>
+        <pre>
+#coding=utf-8
+'''新建用户名'''
+import pickle
+
+def new1():
+    f2 = open('new1.txt','rb')
+    b=(pickle.load(f2))
+
+    while True:
+        name=input('输入用户名：')
+        if name in b:
+            print( '此用户名已经被使用，请重新输入：')
+            continue
+        else:
+            break
+    f2 = open('new1.txt','wb')
+    new={name:[123]}
+    passwd = input('请输入密码：')
+    new[name][0]=passwd
+    b.update(new)
+    pickle.dump(b,f2)
+    f2.close()
+
+    a=input('press any')
+        </pre>
+      </p>
+    </div>
+    
+    <div>
+      <h1>登陆程序</h1>
+      <p>
+        <pre>
+#coding=utf-8
+import pickle
+  
+def denglu():
+      f2 = open('new1.txt','rb')
+      b=(pickle.load(f2))
+      
+      while True:
+          name = input('输入用户名：')
+          if name not in b:
+              print( '您输入的用户名不存在，请重新输入：')
+              continue
+          else:
+              break
+      
+      passwd = input('请输入密码：')
+      
+      if passwd == b[name][0]:
+          print('欢迎进入XXOO系统，请点右上角的X结束程序！')
+      else:
+          print('密码错误！')
+  
+      f2.close()
+  
+      h=input('press any')
+  
+        </pre>
+      </p>
+    </div>
+
+    <div>
+      <h1>搜索程序</h1>
+      <p>
+        <pre>
+#coding=utf-8
+import pickle
+
+def search():
+    f2 = open('new1.txt','rb')
+    b=(pickle.load(f2))
+
+    name=input('输入要查找的用户:')
+    if name:
+        if name in b:
+            yonghu='用户名：'
+            mima='密码:'
+            print(yonghu,name,mima,b[name])
+        else:
+            print('不存在')
+
+    a=input('press any')
+
+        </pre>
+      </p>
+    </div>
+
+  </body>
+</html>
