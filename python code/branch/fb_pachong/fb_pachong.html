@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+<head>
+    <mata charset='utf-8'>
+    <title>web crawler</title>
+    <style type='text/css'>
+	*{
+	    margin:0;
+	    padding:0;
+	}
+	.page{
+	    width:100%;
+	    background:#000;
+	    position:relative;
+	    padding-left:300px;
+	    box-sizing:border-box;
+	}
+	.side, .main{
+	    height:100%;
+	    box-sizing:border-box;
+	}
+	.main{
+	    width:100%;
+	    background:#FFF;
+	    padding:55px;
+	}
+	.main h1{
+	    font-size:55px;
+	}
+	.main p{
+	    font-size:22px;
+	}
+	.side{
+	    width:333px;
+	    color:#FFF;
+	    background:#000;
+	    position:absolute;
+	    left:0;
+	    padding:33px;
+	}
+
+
+
+    </style>
+<body>
+<div class='page'>
+    <div class='side'>
+	<img src=''>
+	<h2><b>web crawler</b></h2>
+	<p>
+</br>Only for fun
+	</p>
+    </div>
+    <div class='main'>
+	     <h1>first blood在python的小爬虫</h1>
+       <img src='jerry_hold_huaji.jpg'>
+       <p font-size=175px><font color='blue'><b>
+         厉害的人正在研究反爬虫……而我</br></br>
+
+         好吧，先是根据教程小甲鱼的有道，代码有些不同。</br></br>
+       </b></font></p>
+       <h2>有道翻译小爬虫</h2>
+       <p>
+<pre>
+import urllib.request
+import urllib.parse
+import json
+url = '?????'
+
+concent = input('input:')
+
+
+
+'''
+head = {}
+head['User-Agent'] = '???'
+'''
+
+
+data = {}
+data['i']= concent
+data['from'] = 'AUTO'
+data['to'] = 'AUTO'
+data['smartresult'] = 'dict'
+data['client'] = 'fanyideskweb'
+data['salt'] = '215032287070001'
+data['sign'] = 'e695439426b4c4b1000eb38e1043b78e'
+data['doctype'] = 'json'
+data['version'] = '2.1'
+data['keyfrom'] = 'fanyi.web'
+data['action'] = 'FY_BY_CLICKBUTTION'
+data['typeResult'] = 'true'
+
+data = urllib.parse.urlencode(data).encode('utf-8')
+
+req = urllib.request.Request(url,data)
+req.add_header('???')
+
+
+response = urllib.request.urlopen(url,data)
+html = response.read().decode('utf-8')
+
+target = json.loads(html)
+print('翻译为：%s'%(target['translateResult'][0][0]['tgt']))
+</pre>
+        </p>
+        <p font-size=175px><font color='blue'><b>
+        </br>接下来两个都是自己独立参考小甲鱼的小爬虫。</br></br>
+        </b></font></p>
+        <h2>百度中文小翻译</h2>
+        <p>（百度这个只能是en-zh）</p>
+        <p><pre>import urllib.request
+import urllib.parse
+import json
+url = '???'
+
+concent = input('input:')
+
+head = {}
+head['User-Agent'] = '???'
+
+data = {}
+data['from'] = 'en'
+data['to'] = 'zh'
+data['query'] = concent
+data['transtype'] = 'translang'
+data['simple_means_flag'] = '3'
+
+
+data = urllib.parse.urlencode(data).encode('utf-8')
+
+response = urllib.request.urlopen(url,data)
+html = response.read().decode('utf-8')
+
+target = json.loads(html)
+print(target['trans_result']['data'][0]['dst'])
+
+a = input('Press any:')</pre></p>
+        <p font-size=175px><font color='blue'><b>
+        </br>
+通过摸索，还是能在iciba上实现自由中英翻译，英中翻译，当然附上作弊代码：<i>失效了。。。</i></br>
+检查全是英文的函数</br></br>
+        </b></font></p>
+        <p><pre>
+def hasEnlishChar(str_content):
+    match = re.match(r'.*[a-zA-Z].*', str_content)
+    return bool(match)</pre></p>
+    <h2></br>iciba的翻译：</br></br></h2>
+    <p><pre>
+import urllib.request
+import urllib.parse
+import json
+import re
+
+def hasEnlishChar(str_content):
+    match = re.match(r'.*[a-zA-Z].*', str_content)
+    return bool(match)
+
+url = '???'
+
+concent = input('input:')
+
+head = {}
+head['User-Agent'] = '???'
+
+data = {}
+data['f'] = 'auto'
+data['t'] = 'auto'
+data['w'] = concent
+
+data = urllib.parse.urlencode(data).encode('utf-8')
+
+response = urllib.request.urlopen(url,data)
+html = response.read().decode('utf-8')
+
+target = json.loads(html)
+
+if hasEnlishChar(concent):
+    print(target['content']['word_mean'])
+else:
+    print(target['content']['out'])
+
+a = input('Press any:')
+    </pre></p>
+    <p font-size=175px><font color='blue'><b>
+    </br>
+大同小异，反正要留意浏览器审查元素，找到url</br>
+    </b></font></p>
+    <img src="1.jpg"></br>
+    <img src="2.jpg"></br>
+    <p font-size=175px><font color='blue'><b>
+    如上图会发现在method那里有get，post，懂的</br>
+
+接下来寻找一些必备数据，data，还有返回的信息
+    </b></font></p>
+    <img src="3.jpg"></br>
+    <img src="4.jpg"></br>
+    <img src="5.jpg"></br>
+    </div>
+</div>
+</body>
+</html>
